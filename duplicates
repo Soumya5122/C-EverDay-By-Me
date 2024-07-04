@@ -1,0 +1,54 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    vector<int> duplicates(vector<long long> arr) {
+        vector<int> result;
+        sort(arr.begin(), arr.end());//sorts in ascending order and requires package called #include <algorithm>
+        
+        for (int i = 1; i < arr.size(); i++) {
+            if (arr[i] == arr[i-1]) {  //compares with previous
+                result.push_back(static_cast<int>(arr[i]));//push at end 
+                i++;
+            }
+        }
+        
+        if (result.empty()) { //if result empty means no dupliactes return -1
+            result.push_back(-1);
+        }
+        
+        return result;
+    }
+};
+
+int main() {
+    // Example usage
+    vector<long long> arr1 = {1, 2, 3, 4, 5};
+    Solution solution;
+    vector<int> duplicates1 = solution.duplicates(arr1);
+    cout << "Duplicates: ";
+    for (int num : duplicates1) {
+        cout << num << " ";
+    }
+    cout << endl; // Output: Duplicates: -1
+    
+    vector<long long> arr2 = {1, 2, 3, 2, 4, 5};
+    vector<int> duplicates2 = solution.duplicates(arr2);
+    cout << "Duplicates: ";
+    for (int num : duplicates2) {
+        cout << num << " ";
+    }
+    cout << endl; // Output: Duplicates: 2
+    
+    vector<long long> arr3 = {1, 1, 2, 2, 3, 3};
+    vector<int> duplicates3 = solution.duplicates(arr3);
+    cout << "Duplicates: ";
+    for (int num : duplicates3) {
+        cout << num << " ";
+    }
+    cout << endl; // Output: Duplicates: 1 2 3
+    
+    return 0;
+}
